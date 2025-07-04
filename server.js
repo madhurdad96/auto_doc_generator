@@ -12,7 +12,6 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Import templates
 const promptTemplates = require("./promptTemplates");
 
 app.post("/generate-doc", async (req, res) => {
@@ -21,7 +20,6 @@ app.post("/generate-doc", async (req, res) => {
   const template = promptTemplates[documentType];
   if (!template) return res.status(400).send("Invalid document type");
 
-  // Build the dynamic prompt
   const prompt = template
     .replace(/\[Business Type\]/g, businessType)
     .replace(/\[Jurisdiction\]/g, jurisdiction)
